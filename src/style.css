@@ -70,15 +70,20 @@ body {
   overflow: hidden;
 }
 
+.vertical-gutter,
+.horizontal-gutter {
+  background-color: var(--on-bg-color);
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
 .vertical-gutter {
   grid-area: 1 / 2 / 4 / 2;
   cursor: col-resize;
-  background-color: var(--on-bg-color);
 }
 .horizontal-gutter {
   grid-area: 2 / 1 / 2 / 4;
   cursor: row-resize;
-  background-color: var(--on-bg-color);
 }
 
 .content {

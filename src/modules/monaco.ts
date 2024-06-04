@@ -60,7 +60,8 @@ const htmlLogo: ContentWidget = {
         };
     }
 }
-const html = MonacoEditor.editor.create($('#html'), {
+export const htmlElement = $('#html')
+export const html = MonacoEditor.editor.create(htmlElement, {
     value: '',
     language: 'html',
     minimap: {
@@ -87,7 +88,8 @@ const jsLogo: ContentWidget = {
         };
     }
 }
-const js = MonacoEditor.editor.create($('#js'), {
+export const jsElement = $('#js')
+export const js = MonacoEditor.editor.create(jsElement, {
     value: '',
     language: 'javascript',
     minimap: {
@@ -114,15 +116,14 @@ const cssLogo: ContentWidget = {
         };
     }
 }
-const css = MonacoEditor.editor.create($('#css'), {
+export const cssElement = $('#css')
+export const css = MonacoEditor.editor.create(cssElement, {
     value: '',
     language: 'css',
     minimap: {
         enabled: false
-    }
+    },
 })
 css.addOverlayWidget(cssLogo)
 
-const setTheme = MonacoEditor.editor.setTheme
-
-export {html, js, css, setTheme}
+export const setTheme = MonacoEditor.editor.setTheme

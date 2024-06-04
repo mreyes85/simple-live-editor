@@ -1,26 +1,32 @@
 import './style.css'
 import {encode, decode} from 'js-base64'
-import './modules/splitter'
-import { html as htmlEl, js as jsEl, css as cssEl } from './modules/monaco'
+import { initSplitter, setResizer } from './modules/splitter'
+import { html as htmlEditor, js as jsEditor, css as cssEditor, htmlElement, jsElement, cssElement } from './modules/monaco'
 import './modules/dark'
 import { getElement as $ } from './modules/utilities'
 
 const HASH_SEPARATOR = '|'
 
 function init(){
+  initSplitter()
+  setResizer([
+    { resize: htmlEditor, from: htmlElement },
+    { resize: jsEditor, from: jsElement },
+    { resize: cssEditor, from: cssElement },
+  ])
   const hash = decodeURI(window.location.pathname.substring(1))
   const [html, css, js] = hash.split(HASH_SEPARATOR)
 
-  if (html) htmlEl.setValue(decode(html))
-  if (js) jsEl.setValue(decode(js))
-  if (css) cssEl.setValue(decode(css))
+  if (html) htmlEditor.setValue(decode(html))
+  if (js) jsEditor.setValue(decode(js))
+  if (css) cssEditor.setValue(decode(css))
   update()
 }
 
 function update(){
-  const html = htmlEl.getValue()
-  const js = jsEl.getValue()
-  const css = cssEl.getValue()
+  const html = htmlEditor.getValue()
+  const js = jsEditor.getValue()
+  const css = cssEditor.getValue()
 
   const hashedCode = `${encode(html)}${HASH_SEPARATOR}${encode(css)}${HASH_SEPARATOR}${encode(js)}`
   try {
@@ -31,9 +37,9 @@ function update(){
   $('#result').setAttribute('srcdoc', result)
 }
 
-htmlEl.onDidChangeModelContent(update)
-jsEl.onDidChangeModelContent(update)
-cssEl.onDidChangeModelContent(update)
+htmlEditor.onDidChangeModelContent(update)
+jsEditor.onDidChangeModelContent(update)
+cssEditor.onDidChangeModelContent(update)
 
 function createHtml({html, js, css}: {html: string, js: string, css: string}){
   return `
