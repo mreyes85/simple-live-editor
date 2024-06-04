@@ -5,7 +5,6 @@ let darkModeState = false
 
 export const useDark = window.matchMedia('(prefers-color-scheme: dark)')
 
-
 export const setDarkMode = (state: boolean) => {
     document.documentElement.classList.toggle('dark-mode', state)
     darkModeState = state
@@ -14,7 +13,8 @@ export const setDarkMode = (state: boolean) => {
 export const toggleDarkMode = () => {
     setDarkMode(!document.documentElement.classList.contains('dark-mode'))
 }
-useDark.addListener((evt: MediaQueryListEvent) => setDarkMode(evt.matches))
+useDark.addEventListener('change', (evt: MediaQueryListEvent) => setDarkMode(evt.matches))
+setDarkMode(useDark.matches)
 
 const toggleThemeEl = $('#toggleTheme')
 toggleThemeEl.addEventListener('click', toggleDarkMode)
