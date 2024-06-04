@@ -1,0 +1,39 @@
+{
+  "name": "live-editor",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build:dev": "vite build --mode development",
+    "build:tst": "vite build --mode staging",
+    "build": "vite build",
+    "dev": "vite --port 3333 --open",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "preview-https": "serve dist",
+    "test": "vitest",
+    "test:e2e": "cypress open",
+    "test:unit": "vitest",
+    "typecheck": "vue-tsc --noEmit",
+    "up": "taze major -I",
+    "postinstall": "npx simple-git-hooks",
+    "sizecheck": "npx vite-bundle-visualizer"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "standard": "^17.1.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0"
+  },
+  "dependencies": {
+    "highlight.js": "^11.9.0",
+    "js-base64": "^3.7.7",
+    "monaco-editor": "^0.47.0",
+    "split-grid": "^1.0.11"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/standard/eslintrc.json"
+    ]
+  }
+}
